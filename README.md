@@ -302,6 +302,192 @@ int main() {
 ```
 
 
+# LECTURE 4 (UML Diagrams)
+
+## What is a UML Diagram?
+UML (Unified Modeling Language) diagrams are standardized ways to visually represent the design and structure of a software system. They help in understanding, documenting, and communicating the architecture and behavior of a system.
+
+### Types of UML Diagrams
+- **Structural (Static) Diagrams:** Show the components and their relationships (e.g., Class Diagram, Object Diagram, Component Diagram, Deployment Diagram, etc.)
+- **Behavioral (Dynamic) Diagrams:** Show how components interact and behave over time (e.g., Sequence Diagram, Use Case Diagram, Activity Diagram, State Diagram, etc.)
+
+---
+
+## Class Diagram
+A Class Diagram is a type of structural diagram that shows the classes in a system, their attributes, methods, and the relationships between them. It is widely used in object-oriented design.
+
+<!-- 1: class structure -->
+
+### Notation
+- **Class Name** at the top (centered, bold)
+- **Attributes** listed with visibility:
+  - `+` Public
+  - `#` Protected
+  - `-` Private
+- **Methods** listed with visibility and return type
+- **Abstract classes** are marked with `<<abstract>>`
+
+#### Example: UML Class Diagram for `Car`
+
+```
++----------------------+
+|        Car           |
++----------------------+
+| - brand: string      |
+| - model: string      |
+| - engine: int        |
++----------------------+
+| +startEngine(): void |
+| +stopEngine(): void  |
+| +accelerate(): void  |
+| +brake(): void       |
++----------------------+
+```
+
+**Explanation:**
+- The `Car` class has three private attributes: `brand`, `model`, and `engine`.
+- It has four public methods: `startEngine()`, `stopEngine()`, `accelerate()`, and `brake()`.
+- The `+` sign indicates public, and the `-` sign indicates private.
+
+<!-- 2: class asscoiation.connection -->
+## Associations in UML Class Diagrams
+
+In UML, there are two main types of associations:
+
+### 1. Class Association (Inheritance)
+- Shows "is-a" relationships between classes.
+- Symbol: `------|>`
+- Example: `ManualCar` and `ElectricCar` are child classes that inherit from `Car`.
+
+```
+ManualCar ------|> Car
+ElectricCar ------|> Car
+```
+- **Explanation:**
+  - `ManualCar` and `ElectricCar` inherit from `Car` (they are types of Car).
+
+---
+
+### 2. Object Association (Between Objects)
+Shows how objects relate to each other. There are three main types:
+
+#### a) Simple Association ("uses" or "knows")
+- Symbol: `----->`
+- Example: A `Person` lives in a `House`.
+```
+Person -----> House
+```
+
+#### b) Aggregation ("has a" - parts can exist independently)
+- Symbol: `---◇`
+- Example: A `Room` contains `Bed`, `Chair`, and `Sofa`.
+```
+        Chair
+         |
+         |
+         ◇   
+Sofa ---◇Room◇--- Bed
+```
+
+#### c) Composition ("owns a" - parts cannot exist independently)
+- Symbol: `---◆`
+- Example: A `Chair` is made of `Arms`, `Seat`, and `Wheels`.
+```
+        Wheel
+         |
+         |
+         ◆   
+Arms ---◆Chair◆--- Seat
+```
+
+**Summary Table:**
+| Type             | Symbol  | Example                | Ownership         |
+|------------------|---------|------------------------|-------------------|
+| Inheritance      | ---!>   | ManualCar ---!> Car    | is-a              |
+| Simple Association| -----> | Person -----> House    | uses/knows        |
+| Aggregation      | ---◇    | Room ◇--- Bed          | has-a (weak)      |
+| Composition      | ---◆    | Chair ◆--- Seat        | owns-a (strong)   |
+
+
+## Sequence Diagram
+A Sequence Diagram is a type of behavioral UML diagram that shows how objects interact with each other in a particular scenario of a use case. It focuses on the order of messages exchanged between objects over time.
+
+### Key Concepts
+- **Object:** Represented at the top as a box with the object's name (e.g., `A`, `B`, `C`).
+- **Lifeline:** A vertical dashed line below each object, showing the object's existence over time.
+- **Activation Bar:** A thin rectangle (or thick vertical line) on the lifeline, showing when an object is active/performing an action. It is usually drawn as a narrow box over the lifeline during the period the object is executing a process or waiting for a response.
+  - Example:
+    ```
+    A           B
+    |           |
+    | ======>   |   // Activation bar on A during its action
+    |           |
+    ```
+- **Message:** An arrow between lifelines, representing communication. There are two main types:
+  - **Synchronous (sync):** Sender waits for a response. Solid arrow with a filled arrowhead: `A --------|> B`
+  - **Asynchronous (async):** Sender does not wait. Solid arrow with open arrowhead: `A ---------> B`
+- **Response:** Dashed arrow back to the sender, often for return values: `B <|-------- A`
+
+### Example Sequence Diagram
+
+```
+A           B           C
+|           |           |
+| --------->|           |   // async message from A to B
+|           |---------> |   // async message from B to C
+|           |<--------  |   // response from C to B (dashed)
+| <-------- |           |   // response from B to A (dashed)
+```
+
+**Legend:**
+- `--------->` : Asynchronous message
+- `---------|>` : Synchronous message
+- `<|--------` : Response (dashed line)
+
+**Explanation:**
+- `A` sends an async message to `B`.
+- `B` sends an async message to `C`.
+- `C` responds to `B` (dashed line).
+- `B` responds to `A` (dashed line).
+
+### Special Message Types in Sequence Diagrams
+
+#### 1. Create Message
+- Used to show when an object is created during the interaction.
+- Shown as a dashed arrow with the keyword `create`.
+```
+A ---------> B : create
+```
+
+#### 2. Destroy Message
+- Shows when an object is destroyed (often with an 'X' at the end of the lifeline).
+- Shown as a solid arrow with the keyword `destroy` or a cross at the end.
+```
+A ---------> B : destroy
+                   X
+```
+
+#### 3. Lost Message
+- A message sent but not received by any known object (arrow points to nowhere).
+```
+A ---------> [lost]
+```
+
+#### 4. Found Message
+- A message received by an object, but the sender is unknown (arrow comes from nowhere).
+```
+[found] ---------> B
+```
+
+**Explanation:**
+- **Create:** Shows object creation during the sequence.
+- **Destroy:** Shows object destruction during the sequence.
+- **Lost:** Message sent but not received by any object in the diagram.
+- **Found:** Message received by an object from an unknown sender.
+
+
+
+
 
 
 
