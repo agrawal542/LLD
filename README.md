@@ -1,53 +1,54 @@
-# LECTURE 1 (INTRODUCTION TO SYSTEM DESIGN)
+# INTRODUCTION TO SYSTEM DESIGN
 
-## LLD: Low Level Design
--  Scalability: The system should work well even if the number of users or data increases a lot.
--  Maintainability: It should be easy to fix bugs or add new features without breaking old ones.
--  Reusability: The same code should work in different parts of the app without rewriting it.
+## What is Low Level Design (LLD)?
+- **Scalability:** System works well even if users or data increase a lot.
+- **Maintainability:** Easy to fix bugs or add features without breaking old code.
+- **Reusability:** Code can be reused in different parts of the app without rewriting.
 
 ---
 
 ## HLD vs LLD vs DSA
-- HLD (High Level Design): Focuses on system architecture, technology stack, database choices, server scaling, and cost optimization.
-- LLD (Low Level Design): Focuses on code structure, class diagrams, and implementation details.
-- DSA (Data Structures & Algorithms): Used to solve problems in LLD; DSA is the brain of the application, while LLD is the skeleton.
+- **HLD (High Level Design):** Focuses on system architecture, technology stack, database choices, server scaling, and cost optimization.
+- **LLD (Low Level Design):** Focuses on code structure, class diagrams, and implementation details.
+- **DSA (Data Structures & Algorithms):** Used to solve problems in LLD; DSA is the brain, LLD is the skeleton.
 
 ---
 
-## Algorithm: Rider Mapping
-Rider mapping algorithms are used to efficiently match riders with drivers in ride-sharing platforms. The main goals are to minimize wait times, optimize routes, and maximize resource utilization.
+## Rider Mapping Algorithm
+Rider mapping algorithms efficiently match riders with drivers in ride-sharing platforms. Goals:
+- Minimize wait times
+- Optimize routes
+- Maximize resource utilization
 
 ---
 
 ## Summary
-- HLD focuses on system architecture.
-- LLD focuses on code structure.
-- DSA is used to solve problems in LLD.
+- **HLD:** System architecture
+- **LLD:** Code structure
+- **DSA:** Problem solving in LLD
 
 ---
 
-# LECTURE 2 (OOPs Pillars: Abstraction, Encapsulation)
+# HISTORY OF PROGRAMMING
 
-## History of Programming
-
-### 1. Machine Language (0/1)
+## 1. Machine Language (0/1)
 - Direct interaction with CPU
 - Prone to errors
 - Not scalable
 
-### 2. Assembly Language
+## 2. Assembly Language
 - Example: `MOV A, 61H`
 - Prone to errors
 - Not scalable (direct interaction with hardware)
 - Tedious to write and maintain
 
-### 3. Procedural Programming
+## 3. Procedural Programming
 - Uses functions
 - Control structures: if-else, switch
 - Loops
 - Code is a set of instructions
 
-#### Example (Procedural Approach)
+### Example (Procedural Approach)
 ```cpp
 std::string engine;
 std::string model;
@@ -73,14 +74,14 @@ int main_proc() {
 }
 ```
 
-### 4. Object-Oriented Programming (OOP)
+## 4. Object-Oriented Programming (OOP)
 - Real-world modeling
 - Data security
 - Highly scalable and reusable
 - Objects interact with each other and have characteristics (attributes) and behaviors (methods)
 - All these characteristics and behaviors are grouped into a class, making the code more organized, reusable, and easier to maintain.
 
-#### Example (OOP Approach)
+### Example (OOP Approach)
 ```cpp
 class Car {
 public:
@@ -115,6 +116,8 @@ int main() {
     return 0;
 }
 ```
+
+# OOPS PILLARS
 
 ## Pillars of OOPs
 - Abstraction
@@ -188,8 +191,6 @@ int main() {
     return 0;
 }
 ```
-
-# LECTURE 3 (OOPs Pillars: Inheritance, Encapsulation)
 
 ### Inheritance
 Inheritance means a class (child) can use the properties and behaviors (methods) of another class (parent). It helps to reuse code and extend existing functionality.
@@ -302,7 +303,7 @@ int main() {
 ```
 
 
-# LECTURE 4 (UML Diagrams)
+# UML DIAGRAMS
 
 ## What is a UML Diagram?
 UML (Unified Modeling Language) diagrams are standardized ways to visually represent the design and structure of a software system. They help in understanding, documenting, and communicating the architecture and behavior of a system.
@@ -484,8 +485,6 @@ A ---------> [lost]
 - **Destroy:** Shows object destruction during the sequence.
 - **Lost:** Message sent but not received by any object in the diagram.
 - **Found:** Message received by an object from an unknown sender.
-
-
 
 
 
