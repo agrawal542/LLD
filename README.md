@@ -487,6 +487,88 @@ A ---------> [lost]
 - **Found:** Message received by an object from an unknown sender.
 
 
+# SOLID PRINCIPLES
+
+### S: Single Responsibility Principle (SRP)
+A class should have only one reason to change, meaning it should have only one responsibility.
+
+**Example:**
+_Violates SRP:_
+- `Product` class handles product data, cost calculation, invoice printing, and saving to the database—all in one class.
+- Too many responsibilities make the class hard to maintain and extend.
+
+_Follows SRP:_
+- `Product` class: handles product data only.
+- `ShoppingCart` class: calculates cost of products.
+- `InvoicePrinter` class: prints invoice.
+- `SaveToDatabase` class: saves to DB.
+- Each class has a single, clear responsibility.
+
+### O: Open/Closed Principle (OCP)
+A class should be open for extension but closed for modification.
+
+**Example:**
+_Violates OCP:_
+- `SaveToDatabase` class directly supports `MySQL`, `MongoDB`, and `PostgreSQL`.
+- Adding a new database requires modifying the class, risking bugs and breaking existing code.
+
+_Follows OCP:_
+- Create a `Persistence` interface or abstract class.
+- Implement separate classes for each database (`MySQLPersistence`, `MongoDBPersistence`, `PostgreSQLPersistence`).
+- Add new databases by creating new classes, without changing existing code.
+
+### L: Liskov Substitution Principle (LSP)
+A subclass should be substitutable for its base class without affecting the correctness of the program.
+
+**Example:**
+_Violates LSP:_
+- All account types inherit `deposit()` and `withdraw()` methods from `Account` base class.
+- `FixedTermAccount` does not support withdrawal and throws an exception if `withdraw()` is called.
+- Code expecting all accounts to support withdrawal breaks.
+
+_Follows LSP:_
+- Split hierarchy:
+  - `DepositOnlyAccount`: supports only `deposit()`.
+  - `WithdrawableAccount`: supports both `deposit()` and `withdraw()`.
+- `SavingAccount` and `CurrentAccount` inherit from `WithdrawableAccount` and support both `deposit()` and `withdraw()`.
+- `FixedTermAccount` inherits from `DepositOnlyAccount` and supports only `deposit()`.
+- All subclasses are substitutable for their base class without breaking expected behavior.
+
+### I: Interface Segregation Principle (ISP)
+No client should be forced to depend on methods it does not use. Split large interfaces into smaller, more specific ones.
+
+**Example:**
+_Violates ISP:_
+- `Shape` interface requires all shapes to implement both `area()` and `volume()`.
+- 2D shapes like `Square` and `Rectangle` are forced to implement `volume()`, which is not applicable.
+- Leads to unnecessary code or exceptions.
+
+_Follows ISP:_
+- Create separate interfaces:
+  - `TwoDimensionalShape` with `area()`.
+  - `ThreeDimensionalShape` with `area()` and `volume()`.
+- `Square` and `Rectangle` implement only the 2D interface.
+- `Cube` implements the 3D interface.
+- Each class only implements methods relevant to its type.
+
+### D: Dependency Inversion Principle (DIP)
+High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+**Example:**
+_Violates DIP:_
+- Application directly creates and uses specific database classes (e.g., `SqlDb`, `MongoDb`) in the business logic.
+- Switching databases requires changing the application code everywhere those classes are used.
+- High-level module is tightly coupled to low-level modules and hard to maintain or extend.
+
+_Follows DIP:_
+- Application depends on an abstraction (e.g., `Persistent` interface or base class).
+- Concrete database classes (e.g., `SqlDb`, `MongoDb`, `PostgreSqlDb`) implement this abstraction.
+- High-level module interacts only with the abstraction.
+- You can switch or add databases without changing the business logic.
+- Code is flexible, maintainable, and testable.
+
+---
+
 
 
 
